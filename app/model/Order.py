@@ -1,8 +1,8 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, EmailStr
 from datetime import datetime
 from typing import Literal
 
-class Product(BaseModel)
+class Order(BaseModel):
     id: int
     customer_name: str
     customer_email: str
@@ -11,3 +11,11 @@ class Product(BaseModel)
     created_at: datetime
     updated_at: datetime
     
+class ProductItemModel(BaseModel):
+    product_id: int
+    quantity: int
+    
+class OrderRequestModel(BaseModel):
+    customer_name: str
+    customer_email: EmailStr
+    items: list[ProductItemModel]
